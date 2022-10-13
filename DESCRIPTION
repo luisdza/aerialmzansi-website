@@ -12,5 +12,7 @@ Suggests:
     jsonlite,
     htmltools,
     knitr,
-    rmarkdown
+    rmarkdown,
+    downlit,
+    xml2
 Encoding: UTF-8

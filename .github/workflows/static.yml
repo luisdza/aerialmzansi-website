@@ -64,6 +64,8 @@ jobs:
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./_output
 
   # Deployment job
   deploy:

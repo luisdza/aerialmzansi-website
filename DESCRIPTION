@@ -1,0 +1,12 @@
+Package: aerialmzansi
+Title: Aerial Mzansi.
+Version: 0.1
+Authors@R: c(
+    person("Luis", "de Sousa", , "luisd@syeop.co.za", role = c("aut", "cre"))
+  )
+Depends: 
+    R (>= 4.2.0)
+Suggests:
+    dplyr,
+    sf
+Encoding: UTF-8

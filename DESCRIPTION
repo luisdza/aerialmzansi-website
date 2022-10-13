@@ -10,5 +10,6 @@ Suggests:
     dplyr,
     sf,
     jsonlite,
-    htmltools
+    htmltools,
+    knitr
 Encoding: UTF-8

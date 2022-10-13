@@ -25,18 +25,18 @@ scale <- 2.5
 w <- 512*scale
 h <- 512*scale
 
-(img_url <- paste0(
+img_url <- paste0(
   "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/",
   paste0(lon, ",", lat),
   ",",zoom,",0/",w,"x",h,"@2x?access_token=", # first digit on this line is zoom level (between 0 and 22)
   Sys.getenv("MAPBOX_PUBLIC_ACCESS_TOKEN")
-))
+  )
 
 #temp_file <- tempfile(fileext = ".jpeg")
 #download.file(img_url, temp_file)
 
-image_name <- paste0('images/',as.character(Sys.time(), format = '%Y%m%d-%H%M'),".jpeg")
+image_name <- paste0(as.character(Sys.time(), format = '%Y%m%d-%H%M'),".jpeg")
 file.create(image_name)
-download.file(img_url, image_name, mode = "wb")
+download.file(img_url, image_name, mode = "wb", quiet = TRUE)
 ```
 

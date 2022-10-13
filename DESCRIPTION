@@ -9,5 +9,6 @@ Depends:
 Suggests:
     dplyr,
     sf,
-    jsonlite
+    jsonlite,
+    htmltools
 Encoding: UTF-8

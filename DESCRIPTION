@@ -8,5 +8,6 @@ Depends:
     R (>= 4.2.0)
 Suggests:
     dplyr,
-    sf
+    sf,
+    jsonlite
 Encoding: UTF-8

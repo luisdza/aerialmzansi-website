@@ -12,6 +12,7 @@ Imports:
     sf,
     AzureStor,
     downlit,
-    xml2
+    xml2,
+    kableExtra
 Encoding: UTF-8
 License: file LICENSE

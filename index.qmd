@@ -4,11 +4,9 @@ format: html
 editor: visual
 ---
 
-## aerialmzansi
+# Mzansi from the air
 
-Mzansi from the air
-
-```{r}
+```{r generate new image, echo=FALSE}
 #usethis::edit_r_environ()
 lat <- round(runif(1, -35, -25), 4)
 lon <- round(runif(1, 25, 35), 4)
@@ -32,7 +30,30 @@ img_url <- paste0(
   )
 
 image_name <- paste0(as.character(Sys.time(), format = '%Y%m%d-%H%M'),".jpeg")
-file.create(image_name)
 download.file(img_url, image_name, mode = "wb", quiet = TRUE)
 ```
 
+```{r upload image to Azure, echo=FALSE}
+# Connect to Azure blob
+endp <- AzureStor::blob_endpoint("https://aerialmzansi.blob.core.windows.net/", key=Sys.getenv("AZURE_BLOB_ACCESS_KEY"))
+
+# Select image container
+cont <- AzureStor::blob_container(endp, "images")
+
+# Upload image to container
+AzureStor::storage_upload(cont, image_name)
+
+```
+
+```{r get list of images from Azure blob, echo=FALSE}
+# Image list
+imgs <- dplyr::tibble(image_name = AzureStor::list_blobs(cont, info="name"))
+
+imgs$link <- paste0('https://aerialmzansi.blob.core.windows.net/images/', imgs$image_name)
+
+imgs |>
+  dplyr::mutate(link = paste0('https://aerialmzansi.blob.core.windows.net/images/', image_name)) |>
+  dplyr::mutate(image_name = kableExtra::cell_spec(image_name, "html", link))
+  kableExtra::kable("html", escape = FALSE)
+
+```

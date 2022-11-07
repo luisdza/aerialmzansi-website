@@ -4,15 +4,13 @@ Version: 0.1
 Authors@R: c(
     person("Luis", "de Sousa", , "luisd@syeop.co.za", role = c("aut", "cre"))
   )
+Description: What the package does (one paragraph).
 Depends: 
     R (>= 4.2.0)
-Suggests:
+imports:
     dplyr,
     sf,
-    jsonlite,
-    htmltools,
-    knitr,
-    rmarkdown,
-    downlit,
-    xml2
+    AzureStor,
+    kableExtra
 Encoding: UTF-8
+License: file LICENSE

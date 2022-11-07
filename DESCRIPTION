@@ -7,7 +7,7 @@ Authors@R: c(
 Description: What the package does (one paragraph).
 Depends: 
     R (>= 4.2.0)
-imports:
+Imports:
     dplyr,
     sf,
     AzureStor,

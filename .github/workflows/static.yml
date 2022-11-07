@@ -58,9 +58,10 @@ jobs:
         with:
           use-public-rspm: true
           
-      - name: "[Custom block] [Linux] Install spatial libraries"
-        if: runner.os == 'Linux'
-        run: sudo apt-get install libgdal-dev libproj-dev libgeos-dev libudunits2-dev
+      - name: Fix gdal issue
+        run: |
+          brew update
+          brew install gdal
 
       - uses: r-lib/actions/setup-r-dependencies@v2
 

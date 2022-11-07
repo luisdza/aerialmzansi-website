@@ -15,7 +15,7 @@ while(!test_result){
   rand_pt <- data.frame(lon, lat) 
   rand_pt_sf <- sf::st_as_sf(rand_pt, coords = c("lon", "lat"), crs = "+proj=longlat +datum=WGS84 +no_defs")
   test <- sf::st_intersection(borders$geometry, rand_pt_sf)
-  test_result <- sf::st_is_valid(test)
+  test_result <- any(sf::st_is_valid(test))
 }
 
 lon <- format(lon, scientific = FALSE)
@@ -36,7 +36,7 @@ img_url <- paste0(
   Sys.getenv("MAPBOX_PUBLIC_ACCESS_TOKEN")
   )
 
-image_name <- paste0(as.character(Sys.time(), format = '%Y%m%d-%H%M'),".jpeg")
+image_name <- paste0(as.character(Sys.time(), format = '%Y%m%d_%H%M'),"_",lon,"_",lat,".jpeg")
 download.file(img_url, image_name, mode = "wb", quiet = TRUE)
 ```
 

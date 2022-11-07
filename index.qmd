@@ -17,8 +17,6 @@ while(!test_result){
   test <- sf::st_intersection(borders$geometry, rand_pt_sf)
   test_result <- any(sf::st_is_valid(test))
 }
-
-lon <- format(lon, scientific = FALSE)
   
 zoom <- 17
 # note from https://docs.mapbox.com/help/glossary/zoom-level/

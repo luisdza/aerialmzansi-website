@@ -1,8 +1,6 @@
 ---
-title: "index"
+title: "Mzansi from the air"
 ---
-
-# Mzansi from the air
 
 ```{r generate new image, echo=FALSE}
 #usethis::edit_r_environ()
@@ -47,8 +45,7 @@ AzureStor::storage_upload(cont, image_name)
 # Image list
 imgs <- dplyr::tibble(ImageName = AzureStor::list_blobs(cont, info="name"))
 
-imgs$ImageName <- sprintf("![](https://aerialmzansi.blob.core.windows.net/images/%s)", imgs$ImageName)
-
 imgs |>
-  kableExtra::kable("html", col.names = NULL)
+  dplyr::mutate(ImageName = paste0("<img src=https://aerialmzansi.blob.core.windows.net/images/", ImageName, " height=500 width=500>")) |>
+  kableExtra::kable(format = "html", escape = FALSE, col.names = NULL)
 ```

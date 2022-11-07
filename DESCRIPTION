@@ -11,6 +11,7 @@ imports:
     dplyr,
     sf,
     AzureStor,
-    kableExtra
+    downlit,
+    xml2,
 Encoding: UTF-8
 License: file LICENSE

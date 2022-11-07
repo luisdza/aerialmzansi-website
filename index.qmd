@@ -1,5 +1,8 @@
 ---
 title: "Mzansi from the air"
+filters:
+  - lightbox
+lightbox: auto
 ---
 
 ```{r generate new image, echo=FALSE}
@@ -31,7 +34,8 @@ download.file(img_url, image_name, mode = "wb", quiet = TRUE)
 
 ```{r upload image to Azure, echo=FALSE}
 # Connect to Azure blob
-endp <- AzureStor::blob_endpoint("https://aerialmzansi.blob.core.windows.net/", key=Sys.getenv("AZURE_BLOB_ACCESS_KEY"))
+blob_endp_url <- "https://aerialmzansi.blob.core.windows.net/"
+endp <- AzureStor::blob_endpoint(blob_endp_url, key=Sys.getenv("AZURE_BLOB_ACCESS_KEY"))
 
 # Select image container
 cont <- AzureStor::blob_container(endp, "images")
@@ -40,12 +44,13 @@ cont <- AzureStor::blob_container(endp, "images")
 AzureStor::storage_upload(cont, image_name)
 
 ```
-
+::: {layout="[[2, 2], [1]]"}
 ```{r get list of images from Azure blob, echo=FALSE}
 # Image list
-imgs <- dplyr::tibble(ImageName = AzureStor::list_blobs(cont, info="name"))
+blob_image_names <- AzureStor::list_blobs(cont, info="name")
 
-imgs |>
-  dplyr::mutate(ImageName = paste0("<img src=https://aerialmzansi.blob.core.windows.net/images/", ImageName, " height=500 width=500>")) |>
-  kableExtra::kable(format = "html", escape = FALSE, col.names = NULL)
+imgs <- paste0("![](",blob_endp_url, "images/", blob_image_names , "){group=\"group1\" description=\"",blob_image_names,"\"}")
+
+knitr::kable(imgs, col.names = "")
 ```
+:::

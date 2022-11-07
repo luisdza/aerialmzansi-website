@@ -59,7 +59,8 @@ jobs:
           use-public-rspm: true
  
       - name: Install GDAL required for SF
-        run: sudo apt-get install libudunits2-dev libgdal-dev libgeos-dev libproj-dev
+        if: runner.os == 'Linux'
+        run: sudo apt-get update -y && sudo apt-get install libudunits2-dev libgdal-dev libgeos-dev libproj-dev
 
       - uses: r-lib/actions/setup-r-dependencies@v2
 

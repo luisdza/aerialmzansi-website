@@ -12,6 +12,6 @@ imports:
     sf,
     AzureStor,
     downlit,
-    xml2,
+    xml2
 Encoding: UTF-8
 License: file LICENSE

@@ -14,6 +14,7 @@ Imports:
     downlit,
     xml2,
     knitr,
-    rmarkdown
+    rmarkdown,
+    magrittr
 Encoding: UTF-8
 License: file LICENSE

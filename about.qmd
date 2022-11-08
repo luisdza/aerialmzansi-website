@@ -3,23 +3,21 @@ title: "About"
 editor: visual
 ---
 
-## Quarto
+# Purpose
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+## 1. Art!
 
-## Running Code
+The twitter account [Textures of Utah](https://mobile.twitter.com/texturesofut) initially inspired me. I found there was a whole [mapbotverse](https://mobile.twitter.com/i/lists/1492559073287581707) with similar implementations for different countries. [Matt Dray](https://twitter.com/mattdray) started the mapbotverse with the [londonmapbot](https://twitter.com/londonmapbot) project.
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+I've lived in Johannesburg, South Africa my whole life and in generating random images of South Africa I realised how beautiful the landscape is.
 
-```{r}
-1 + 1
-```
+## 2. Using new technologies
 
-You can add options to executable code like this
+I've implemented the mapbot concept using technologies that I wanted to learn more about:
 
-```{r}
-#| echo: false
-2 * 2
-```
+1.  Github Actions -- Automate the whole build and deploy process to Github pages.
+2.  R / Azure storage -- After generating the images, they are stored in an Azure blob.
+3.  Quarto -- Creating a website with dynamic content.
+4.  Quarto Addins -- Using the lightbox add-in.
 
-The `echo: false` option disables the printing of code (only output is displayed).
+## 3. Working in public

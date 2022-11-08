@@ -1,5 +1,14 @@
 project:
   output-dir: _output
+  type: website
+
+website:
+  title: "Aerial Mzansi"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
 
 format:
   html:
@@ -7,5 +16,4 @@ format:
     code-link: true
     include-in-header: "plausible.html"
     callout-appearance: simple
-
-editor: visual
+    toc: true

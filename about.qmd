@@ -15,7 +15,7 @@ Every 4 hours, a new image is automatically uploaded to the website.
 
 The twitter account [Textures of Utah](https://mobile.twitter.com/texturesofut) initially inspired me. I found there was a whole [mapbotverse](https://mobile.twitter.com/i/lists/1492559073287581707) with similar implementations for different countries. [Matt Dray](https://twitter.com/mattdray) started the mapbotverse with the [londonmapbot](https://twitter.com/londonmapbot) project.
 
-I've lived in Johannesburg, South Africa my whole life and in generating random images of South Africa I realised how beautiful the landscape is.
+I live in Johannesburg, the largest city in South Africa, where space is considered a premium. While generating images of the South African landscape, I realised how sparsely populated the country is.
 
 ## 2. Using new technologies
 
@@ -41,4 +41,4 @@ From Austin Kleon's book, [Show Your Work!](https://www.amazon.com/Show-Your-Wor
 
 # Special Thanks
 
-A popular African proverb is, "It takes a village to raise a child", which holds in my case. I want to thank everyone with whom I've discussed Areal Mzansi and all the open-source authors whose projects I've built it on top of.
+A popular African proverb is, "It takes a village to raise a child", which holds in my case. There are too many people to mention individually.I want to thank everyone with whom I've discussed Areal Mzansi with and all the open-source authors whose projects I've built it on top of.

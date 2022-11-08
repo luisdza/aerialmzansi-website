@@ -6,7 +6,8 @@ Authors@R: c(
   )
 Description: What the package does (one paragraph).
 Depends: 
-    R (>= 4.2.0)
+    R (>= 4.2.0),
+    magrittr
 Imports:
     dplyr,
     sf,
@@ -15,6 +16,6 @@ Imports:
     xml2,
     knitr,
     rmarkdown,
-    magrittr
+    tidyr
 Encoding: UTF-8
 License: file LICENSE

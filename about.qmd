@@ -3,6 +3,12 @@ title: "About"
 editor: visual
 ---
 
+# About Aerial Mzansi
+
+Luis de Sousa created Aerial Mzansi. The source code for the project can be found [here](https://github.com/luisdza/aerialmzansi).
+
+Every 4 hours, a new image is automatically uploaded to the website.
+
 # Purpose
 
 ## 1. Art!
@@ -15,9 +21,11 @@ I've lived in Johannesburg, South Africa my whole life and in generating random 
 
 I've implemented the mapbot concept using technologies that I wanted to learn more about:
 
-1.  Github Actions -- Automate the whole build and deploy process to Github pages.
-2.  R / Azure storage -- After generating the images, they are stored in an Azure blob.
-3.  Quarto -- Creating a website with dynamic content.
-4.  Quarto Addins -- Using the lightbox add-in.
+1.  [Github Actions](https://github.com/features/actions) -- Automate the whole build and deploy process to Github pages.
+2.  [AzureStor](https://cran.r-project.org/web/packages/AzureStor/index.html) -- After generating the images, they are stored in an Azure blob.
+3.  [Quarto](https://quarto.org/) -- Creating a website with dynamic content.
+4.  [Quarto Addins](https://quarto.org/docs/extensions/) -- Lightbox, to create lightbox treatments for images in HTML documents.
 
 ## 3. Working in public
+
+# Architecture

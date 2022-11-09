@@ -64,7 +64,7 @@ blob_image_names %>%
   tidyr::separate(file_name, c("date","time","long","lat"), sep = "_") %>% 
   dplyr::mutate(google_maps_url = paste0('https://maps.google.com?q=/@', lat, ',', long)) %>% 
   dplyr::mutate(open_street_maps_url = paste0('https://www.openstreetmap.org/#map=17/', lat, '/', long)) %>% 
-  dplyr::mutate(markdown = paste0("![](", url, "){ group=\"'",date,"'\" description=\"[Goolge Maps](", google_maps_url, ") [Open Street Maps](", open_street_maps_url, ") Generated ",date," ",time," \"}")) %>% 
+  dplyr::mutate(markdown = paste0("![](", url, "){ group=\"'",date,"'\" description=\"[Google Maps](", google_maps_url, ") [Open Street Maps](", open_street_maps_url, ") Generated ",date," ",time," \"}")) %>% 
   dplyr::select(markdown) %>% 
   knitr::kable(col.names = "")
 ```

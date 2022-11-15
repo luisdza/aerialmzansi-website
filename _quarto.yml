@@ -9,6 +9,7 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+  twitter-card: true
 
 format:
   html:
@@ -17,3 +18,6 @@ format:
     include-in-header: "plausible.html"
     callout-appearance: simple
     toc: true
+    author-meta: "Luis de Sousa"
+    date-meta: today
+    description-meta: "Aerial Mzansi"

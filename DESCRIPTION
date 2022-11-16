@@ -18,6 +18,7 @@ Imports:
     rmarkdown,
     tidyr,
     rnaturalearth,
-    rnaturalearthdata
+    rnaturalearthdata,
+    ggplot2
 Encoding: UTF-8
 License: file LICENSE

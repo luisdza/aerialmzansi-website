@@ -12,8 +12,8 @@ borders <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", coun
 
 test_result <- FALSE
 while(!test_result){
-  lat <- round(runif(1, -35, -25), 4)
-  lon <- round(runif(1, 25, 35), 4)
+  lat <- round(runif(1, -35, -22), 4)
+  lon <- round(runif(1, 16, 33), 4)
   rand_pt <- data.frame(lon, lat) 
   rand_pt_sf <- sf::st_as_sf(rand_pt, coords = c("lon", "lat"), crs = "+proj=longlat +datum=WGS84 +no_defs")
   test <- sf::st_intersection(borders$geometry, rand_pt_sf)

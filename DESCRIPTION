@@ -16,6 +16,8 @@ Imports:
     xml2,
     knitr,
     rmarkdown,
-    tidyr
+    tidyr,
+    rnaturalearth,
+    rnaturalearthdata
 Encoding: UTF-8
 License: file LICENSE

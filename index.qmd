@@ -8,7 +8,7 @@ lightbox: auto
 ```{r generate new image, echo=FALSE}
 library(magrittr)
 
-borders <- sf::read_sf("zaf_admbnda_adm0_sadb_ocha_20201109.shp")
+borders <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", country = "south africa")
 
 test_result <- FALSE
 while(!test_result){

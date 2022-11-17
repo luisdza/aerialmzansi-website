@@ -3,39 +3,8 @@ title: "About"
 editor: visual
 ---
 
-# Images generated for the points below
+![Points with images generated.](https://aerialmzansi.blob.core.windows.net/images/graphplot.png){fig-alt="Map of South Africa with points representing each image generated."}
 
-```{r, message=FALSE, echo=FALSE}
-library(magrittr)
-
-# Connect to Azure blob
-blob_endp_url <- "https://aerialmzansi.blob.core.windows.net/"
-endp <- AzureStor::blob_endpoint(blob_endp_url, key=Sys.getenv("AZURE_BLOB_ACCESS_KEY"))
-
-# Select image container
-cont <- AzureStor::blob_container(endp, "images")
-
-# Image list
-blob_image_names <- data.frame(image_name = AzureStor::list_blobs(cont, info="name"))
-
-blob_image_names <- blob_image_names %>% 
-  dplyr::arrange(desc(image_name)) %>% 
-  dplyr::mutate(file_name = stringr::str_replace(image_name,".jpeg","")) %>%
-  tidyr::separate(file_name, c("date","time","long","lat"), sep = "_")
-
-# World map
-world <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", country = "South Africa")
-
-sites <- sf::st_as_sf(data.frame(longitude = blob_image_names$long, latitude = blob_image_names$lat),
-                       coords = c("longitude", "latitude"), 
-                       crs = 4326,
-                       agr = "constant")
-
-ggplot2::ggplot(data = world) +
-  ggplot2::geom_sf() +
-  ggplot2::geom_sf(data = sites, size = 1, shape = 21, fill = "darkred") +
-  ggplot2::coord_sf(xlim = c(16, 33), ylim = c(-35, -22), expand = FALSE)
-```
 # About Aerial Mzansi
 
 [Luis de Sousa](https://twitter.com/luis_de_sousa) created Aerial Mzansi. The source code for the project can be found [here](https://github.com/luisdza/aerialmzansi).

@@ -5,7 +5,7 @@ filters:
 lightbox: auto
 ---
 
-```{r generate new image, echo=FALSE}
+```{r Generate Random Coordinates, echo=FALSE}
 library(magrittr)
 
 borders <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", country = "south africa")
@@ -28,7 +28,9 @@ zoom <- 17
 scale <- 2.5
 w <- 512*scale
 h <- 512*scale
+```
 
+```{r Upload Mapbox Image to Azure, echo=FALSE}
 img_url <- paste0(
   "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/",
   paste0(lon, ",", lat),
@@ -38,9 +40,7 @@ img_url <- paste0(
 
 image_name <- paste0(as.character(Sys.time(), format = '%Y%m%d_%H%M'),"_",lon,"_",lat,".jpeg")
 download.file(img_url, image_name, mode = "wb", quiet = TRUE)
-```
 
-```{r upload image to Azure, echo=FALSE}
 # Connect to Azure blob
 blob_endp_url <- "https://aerialmzansi.blob.core.windows.net/"
 endp <- AzureStor::blob_endpoint(blob_endp_url, key=Sys.getenv("AZURE_BLOB_ACCESS_KEY"))
@@ -48,12 +48,31 @@ endp <- AzureStor::blob_endpoint(blob_endp_url, key=Sys.getenv("AZURE_BLOB_ACCES
 # Select image container
 cont <- AzureStor::blob_container(endp, "images")
 
-# Upload image to container
+# Upload Mapbox image to container
 AzureStor::storage_upload(cont, image_name)
+```
+```{r upload south africa map with points to Azure, echo=FALSE}
+world <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", country = "South Africa")
 
+sites <- sf::st_as_sf(data.frame(longitude = blob_image_names$long, latitude = blob_image_names$lat),
+                       coords = c("longitude", "latitude"), 
+                       crs = 4326,
+                       agr = "constant")
+
+graphplot <- ggplot2::ggplot(data = world) +
+  ggplot2::geom_sf() +
+  ggplot2::geom_sf(data = sites, size = 1, shape = 21, fill = "darkred") +
+  ggplot2::coord_sf(xlim = c(16, 33), ylim = c(-35, -22), expand = FALSE)
+
+image_name <- "graphplot.png"
+
+ggplot2::ggsave(image_name)
+
+# Upload ggplot image to container
+AzureStor::storage_upload(cont, image_name)
 ```
 
-```{r get list of images from Azure blob, echo=FALSE}
+```{r generate list of images from Azure blob, echo=FALSE}
 # Image list
 blob_image_names <- data.frame(image_name = AzureStor::list_blobs(cont, info="name"))
 

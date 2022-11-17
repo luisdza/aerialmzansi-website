@@ -6,8 +6,6 @@ lightbox: auto
 ---
 
 ```{r Generate Random Coordinates, echo=FALSE}
-library(magrittr)
-
 borders <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", country = "south africa")
 
 test_result <- FALSE
@@ -30,7 +28,7 @@ w <- 512*scale
 h <- 512*scale
 ```
 
-```{r Upload Mapbox Image to Azure, echo=FALSE}
+```{r Download Mapbox Image, echo=FALSE}
 img_url <- paste0(
   "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/",
   paste0(lon, ",", lat),
@@ -38,8 +36,12 @@ img_url <- paste0(
   Sys.getenv("MAPBOX_PUBLIC_ACCESS_TOKEN")
   )
 
-image_name <- paste0(as.character(Sys.time(), format = '%Y%m%d_%H%M'),"_",lon,"_",lat,".jpeg")
-download.file(img_url, image_name, mode = "wb", quiet = TRUE)
+mapbox_image_name <- paste0(as.character(Sys.time(), format = '%Y%m%d_%H%M'),"_",lon,"_",lat,".jpeg")
+download.file(img_url, mapbox_image_name, mode = "wb", quiet = TRUE)
+```
+
+```{r generate list of images from Azure blob, echo=FALSE}
+library(magrittr)
 
 # Connect to Azure blob
 blob_endp_url <- "https://aerialmzansi.blob.core.windows.net/"
@@ -48,42 +50,50 @@ endp <- AzureStor::blob_endpoint(blob_endp_url, key=Sys.getenv("AZURE_BLOB_ACCES
 # Select image container
 cont <- AzureStor::blob_container(endp, "images")
 
-# Upload Mapbox image to container
-AzureStor::storage_upload(cont, image_name)
-```
-```{r upload south africa map with points to Azure, echo=FALSE}
-world <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", country = "South Africa")
-
-sites <- sf::st_as_sf(data.frame(longitude = blob_image_names$long, latitude = blob_image_names$lat),
-                       coords = c("longitude", "latitude"), 
-                       crs = 4326,
-                       agr = "constant")
-
-graphplot <- ggplot2::ggplot(data = world) +
-  ggplot2::geom_sf() +
-  ggplot2::geom_sf(data = sites, size = 1, shape = 21, fill = "darkred") +
-  ggplot2::coord_sf(xlim = c(16, 33), ylim = c(-35, -22), expand = FALSE)
-
-image_name <- "graphplot.png"
-
-ggplot2::ggsave(image_name)
-
-# Upload ggplot image to container
-AzureStor::storage_upload(cont, image_name)
-```
-
-```{r generate list of images from Azure blob, echo=FALSE}
 # Image list
 blob_image_names <- data.frame(image_name = AzureStor::list_blobs(cont, info="name"))
 
-blob_image_names %>% 
+# Generate list of images in Azure blob for website
+blob_images <- blob_image_names %>% 
+  dplyr::filter(image_name != "graphplot.png") %>% 
   dplyr::arrange(desc(image_name)) %>% 
   dplyr::mutate(url = paste0(blob_endp_url,"images/",image_name),
                 file_name = stringr::str_replace(image_name,".jpeg","")) %>%
-  tidyr::separate(file_name, c("date","time","long","lat"), sep = "_") %>% 
+  tidyr::separate(file_name, c("date","time","long","lat"), sep = "_")
+```
+
+```{r generate markdown, echo=FALSE}
+blob_images %>% 
   dplyr::mutate(google_maps_url = paste0('https://maps.google.com?q=/@', lat, ',', long)) %>% 
   dplyr::mutate(open_street_maps_url = paste0('https://www.openstreetmap.org/#map=17/', lat, '/', long)) %>% 
   dplyr::mutate(markdown = paste0("![](", url, "){ group=\"'",date,"'\" description=\"[Google Maps](", google_maps_url, ") [Open Street Maps](", open_street_maps_url, ") Generated ",date," ",time," \"}")) %>% 
   dplyr::select(markdown) %>% 
   knitr::kable(col.names = "")
+```
+
+```{r generate plot of South Africa}
+world <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", country = "South Africa")
+
+sites <- sf::st_as_sf(data.frame(longitude = blob_images$long, latitude = blob_images$lat),
+                       coords = c("longitude", "latitude"), 
+                       crs = 4326,
+                       agr = "constant")
+
+# South africa map with points
+graphplot <- ggplot2::ggplot(data = world) +
+  ggplot2::geom_sf() +
+  ggplot2::geom_sf(data = sites, size = 1, shape = 21, fill = "darkred") +
+  ggplot2::coord_sf(xlim = c(16, 33), ylim = c(-35, -22), expand = FALSE)
+
+ggplot_image_name <- "graphplot.png"
+
+ggplot2::ggsave(ggplot_image_name)
+```
+
+```{r upload files to Azure, echo=FALSE}
+# Upload Mapbox image to container
+AzureStor::storage_upload(cont, mapbox_image_name)
+
+# Upload ggplot image to container
+AzureStor::storage_upload(cont, ggplot_image_name)
 ```

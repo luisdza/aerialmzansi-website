@@ -93,7 +93,7 @@ ggplot_image_name <- "graphplot.png"
 ggplot2::ggsave(ggplot_image_name)
 ```
 
-```{r upload files to Azure, echo=FALSE, include=FALSE}
+```{r upload files to Azure, echo=FALSE}
 # Upload Mapbox image to container
 AzureStor::storage_upload(cont, mapbox_image_name)
 

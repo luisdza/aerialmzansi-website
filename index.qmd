@@ -7,6 +7,8 @@ lightbox: auto
 
 Open Source proof of concept using [Quarto](https://quarto.org/), [GitHub Actions](https://github.com/features/actions), [AzureStor](https://cran.r-project.org/web/packages/AzureStor/index.html) and [mapbotverse](https://mobile.twitter.com/i/lists/1492559073287581707).
 
+New images are automatically uploaded every 4 hours. Click on the image for more details.
+
 ```{r Generate Random Coordinates, echo=FALSE}
 borders <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", country = "south africa")
 

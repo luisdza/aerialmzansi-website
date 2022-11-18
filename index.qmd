@@ -5,6 +5,8 @@ filters:
 lightbox: auto
 ---
 
+Open Source proof of concept using [Quarto](https://quarto.org/), [GitHub Actions](https://github.com/features/actions), [AzureStor](https://cran.r-project.org/web/packages/AzureStor/index.html) and [mapbotverse](https://mobile.twitter.com/i/lists/1492559073287581707).
+
 ```{r Generate Random Coordinates, echo=FALSE}
 borders <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", country = "south africa")
 
@@ -71,7 +73,7 @@ blob_images %>%
   knitr::kable(col.names = "")
 ```
 
-```{r generate plot of South Africa, echo=FALSE}
+```{r generate plot of South Africa, echo=FALSE, message=FALSE}
 world <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", country = "South Africa")
 
 sites <- sf::st_as_sf(data.frame(longitude = blob_images$long, latitude = blob_images$lat),

@@ -9,6 +9,8 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - href: https://github.com/luisdza/aerialmzansi
+        text: Source code
   twitter-card: true
 
 format:

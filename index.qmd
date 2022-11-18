@@ -71,7 +71,7 @@ blob_images %>%
   knitr::kable(col.names = "")
 ```
 
-```{r generate plot of South Africa}
+```{r generate plot of South Africa, echo=FALSE}
 world <- rnaturalearth::ne_countries(scale = "small", returnclass = "sf", country = "South Africa")
 
 sites <- sf::st_as_sf(data.frame(longitude = blob_images$long, latitude = blob_images$lat),

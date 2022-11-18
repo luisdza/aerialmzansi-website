@@ -63,16 +63,15 @@ blob_images <- blob_image_names %>%
   dplyr::arrange(desc(image_name)) %>% 
   dplyr::mutate(url = paste0(blob_endp_url,"images/",image_name),
                 file_name = stringr::str_replace(image_name,".jpeg","")) %>%
-  tidyr::separate(file_name, c("date","time","long","lat"), sep = "_")
-```
-
-```{r generate markdown, echo=FALSE}
-blob_images %>% 
+  tidyr::separate(file_name, c("date","time","long","lat"), sep = "_") %>% 
   dplyr::mutate(google_maps_url = paste0('https://maps.google.com?q=/@', lat, ',', long)) %>% 
   dplyr::mutate(open_street_maps_url = paste0('https://www.openstreetmap.org/#map=17/', lat, '/', long)) %>% 
-  dplyr::mutate(markdown = paste0("![](", url, "){ group=\"'",date,"'\" description=\"[Google Maps](", google_maps_url, ") [Open Street Maps](", open_street_maps_url, ") Generated ",date," ",time," \"}")) %>% 
-  dplyr::select(markdown) %>% 
-  knitr::kable(col.names = "")
+  dplyr::mutate(markdown = paste0("![](", url, "){ group=\"'",date,"'\" description=\"[Google Maps](", google_maps_url, ") [Open Street Maps](", open_street_maps_url, ") Generated ",date," ",time," \"}"))
+
+```
+
+```{r generate markdown, echo=FALSE, results='asis'}
+cat(blob_images$markdown)
 ```
 
 ```{r generate plot of South Africa, echo=FALSE, message=FALSE}
@@ -94,7 +93,7 @@ ggplot_image_name <- "graphplot.png"
 ggplot2::ggsave(ggplot_image_name)
 ```
 
-```{r upload files to Azure, echo=FALSE}
+```{r upload files to Azure, echo=FALSE, include=FALSE}
 # Upload Mapbox image to container
 AzureStor::storage_upload(cont, mapbox_image_name)
 

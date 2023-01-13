@@ -8,7 +8,7 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
         text: About
       - href: https://luisd.shinyapps.io/aerialmzansi-shiny/
         text: Shiny Dashboard

@@ -31,6 +31,8 @@ I've implemented the mapbot concept using technologies that I wanted to learn mo
 
 4.  [Quarto Addins](https://quarto.org/docs/extensions/) -- Lightbox, to create lightbox treatments for images in HTML documents.
 
+5.  [Shiny](https://shiny.rstudio.com/) -- build interactive web apps straight from R.
+
 ## 3. Working in public
 
 From Austin Kleon's book, [Show Your Work!](https://www.amazon.com/Show-Your-Work-Austin-Kleon/dp/076117897X)

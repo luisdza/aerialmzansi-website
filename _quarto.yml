@@ -9,6 +9,9 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+        text: About
+      - href: https://luisd.shinyapps.io/aerialmzansi-shiny/
+        text: Shiny Dashboard
       - href: https://github.com/luisdza/aerialmzansi
         text: Source code
   twitter-card: true

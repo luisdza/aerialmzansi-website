@@ -26,6 +26,8 @@ I've implemented the mapbot concept using technologies that I wanted to learn mo
 
 5.  [Shiny](https://shiny.rstudio.com/) -- build interactive web apps straight from R.
 
+6.  [Golem](https://thinkr-open.github.io/golem/) -- opinionated framework for building production-grade shiny applications
+
 ## 3. Working in public
 
 From Austin Kleon's book, [Show Your Work!](https://www.amazon.com/Show-Your-Work-Austin-Kleon/dp/076117897X)

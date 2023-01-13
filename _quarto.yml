@@ -10,7 +10,7 @@ website:
         text: Home
       - href: about.qmd
         text: About
-      - href: https://luisd.shinyapps.io/aerialmzansi-shiny/
+      - href: https://shiny.aerialmzansi.com/
         text: Shiny Dashboard
       - href: https://github.com/luisdza/aerialmzansi
         text: Source code

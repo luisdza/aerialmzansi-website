@@ -12,8 +12,9 @@ website:
         text: About
       - href: https://shiny.aerialmzansi.com/
         text: Shiny Dashboard
-      - href: https://github.com/luisdza/aerialmzansi-website
-        text: Source code
+    right:
+      - icon: github
+        href: https://github.com/luisdza/aerialmzansi-website
   twitter-card: true
 
 format:

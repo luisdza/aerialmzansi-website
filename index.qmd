@@ -32,7 +32,7 @@ w <- 512*scale
 h <- 512*scale
 ```
 
-```{r Download Mapbox Image, echo=FALSE}
+```{r Download Mapbox Image, echo=FALSE, warning=FALSE}
 img_url <- paste0(
   "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/",
   paste0(lon, ",", lat),

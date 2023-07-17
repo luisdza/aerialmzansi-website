@@ -66,7 +66,7 @@ jobs:
           to: html # If set, it will be equivalent to `quarto render --to html`
           
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: ./_output
 

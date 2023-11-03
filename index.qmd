@@ -40,7 +40,7 @@ img_url <- paste0(
   Sys.getenv("MAPBOX_PUBLIC_ACCESS_TOKEN")
   )
 
-mapbox_image_name <- paste0(as.character(Sys.time(), format = '%Y%m%d_%H%M'),"_",lon,"_",lat,".jpeg")
+mapbox_image_name <- paste0(format(Sys.time(),format = '%Y%m%d_%H%M'),"_",lon,"_",lat,".jpeg")
 download.file(img_url, mapbox_image_name, mode = "wb", quiet = TRUE)
 ```
 
